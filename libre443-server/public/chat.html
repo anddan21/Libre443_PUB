@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libre443</title>
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Libre443 <span id="app-version"></span></h1>
+            <div id="header-actions">
+                <button id="exit-btn">Exit</button>
+            </div>
+        </header>
+
+        <main id="main-content" style="display: none;">
+            <div id="video-container">
+                <video id="remote-video" autoplay playsinline></video>
+                <div id="local-video-container">
+                    <video id="local-video" autoplay muted playsinline></video>
+                </div>
+
+                <div id="media-controls">
+                    <button id="toggle-video-btn">Video: Off</button>
+                    <button id="toggle-audio-btn">Audio: Off</button>
+                </div>
+            </div>
+
+            <div id="chat-container">
+                <div id="chat-messages"></div>
+                <div id="chat-controls">
+                    <input type="text" id="chat-input" placeholder="Type a message...">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Exit confirmation modal -->
+    <div id="exit-modal-overlay" aria-hidden="true">
+        <div id="exit-modal" role="dialog" aria-labelledby="exit-modal-title">
+            <h2 id="exit-modal-title">Exit chat?</h2>
+            <p>You will be returned to the login page.</p>
+            <div id="exit-modal-actions">
+                <button id="exit-modal-cancel" type="button">Cancel</button>
+                <button id="exit-modal-confirm" type="button">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Загрузка библиотеки Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Клиентские скрипты -->
+    <script src="js/ui.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="js/webrtc.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
