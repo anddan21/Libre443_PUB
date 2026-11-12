@@ -95,7 +95,7 @@ button:hover {
     gap: 20px;
 }
 
-/* Настольная версия: видео слева, чат справа на всю высоту */
+/* Desktop: video on the left, full height chat on the right */
 @media (min-width: 769px) {
     #main-content {
         flex-direction: row;
@@ -138,7 +138,7 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-/* Полноэкранный режим */
+/* Fullscreen mode */
 body.fullscreen-mode header,
 body.fullscreen-mode #chat-container {
     display: none !important;
@@ -261,7 +261,7 @@ body.fullscreen-mode #video-container {
     height: 300px;
 }
 
-/* Десктоп: чат на всю высоту (после базового правила, чтобы перекрыть height: 300px) */
+/* Desktop: full height chat (after the base rule, to override height: 300px) */
 @media (min-width: 769px) {
     #chat-container {
         height: 100%;
@@ -375,7 +375,7 @@ body.fullscreen-mode #video-container {
     background: #c82333;
 }
 
-/* Мобильная адаптация */
+/* Mobile layout */
 @media (max-width: 768px) {
     #app {
         padding: 10px;
@@ -417,7 +417,7 @@ body.fullscreen-mode #video-container {
         flex: 1;
     }
 
-    /* Фиксированная высота окна чата, прокрутка только внутри списка сообщений */
+    /* Fixed chat height, scrolling only inside the message list */
     #chat-container {
         height: 450px;
         min-height: 350px;
