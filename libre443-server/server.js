@@ -71,7 +71,7 @@ app.get('/api/me', (req, res) => {
     res.json({ username, id: user ? user.id : null });
 });
 
-// Инициализация WebRTC сигнализации и чата (без изменений)
+// Initialize WebRTC signaling and chat
 setupSockets(io);
 
 server.listen(config.PORT, () => {
