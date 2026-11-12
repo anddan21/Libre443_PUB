@@ -10,39 +10,39 @@ const SocketHandler = {
             console.log('Connected to signaling server:', this.socket.id);
         });
 
-        // Слушатель: системные сообщения (должны отображаться у всех, включая отправителя)
+        // Listener: system messages (shown to everyone, including the sender)
         this.socket.on('system-message', (data) => {
             if (data?.message) {
                 UI.appendSystemMessage(data.message);
             }
         });
 
-        // Слушатель: новый пользователь присоединился
+        // Listener: a new user joined
         this.socket.on('user-joined', async (userId) => {
             console.log('New user joined:', userId);
-            // Если кто-то присоединился, мы инициируем соединение (отправляем offer)
+            // When someone joins, we initiate the connection (send an offer)
             await WebRTCHandler.createOffer();
         });
 
-        // Слушатель: получен offer
+        // Listener: offer received
         this.socket.on('offer', async (data) => {
             console.log('Offer received from', data.from);
             await WebRTCHandler.handleOffer(data.offer);
         });
 
-        // Слушатель: получен answer
+        // Listener: answer received
         this.socket.on('answer', async (data) => {
             console.log('Answer received from', data.from);
             await WebRTCHandler.handleAnswer(data.answer);
         });
 
-        // Слушатель: получен ICE кандидат
+        // Listener: ICE candidate received
         this.socket.on('ice-candidate', async (data) => {
             console.log('ICE candidate received from', data.from);
             await WebRTCHandler.handleCandidate(data.candidate);
         });
 
-        // Слушатель: комната заполнена
+        // Listener: room is full
         this.socket.on('room-full', () => {
             alert('This room is full. You cannot join. Maximum 2 users allowed.');
             if (appState.localStream) {
@@ -62,7 +62,7 @@ const SocketHandler = {
             window.location.href = '/';
         });
 
-        // Слушатель: получено сообщение чата
+        // Listener: chat message received
         this.socket.on('chat-message', (data) => {
             console.log('Message received', data);
             if (data.from !== this.socket.id) {

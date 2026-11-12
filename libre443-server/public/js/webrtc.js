@@ -23,18 +23,18 @@ const WebRTCHandler = {
         this.room = room;
         this.peerConnection = new RTCPeerConnection(this.configuration);
 
-        // Добавляем локальные треки в соединение
+        // Add local tracks to the connection
         localStream.getTracks().forEach(track => {
             this.peerConnection.addTrack(track, localStream);
         });
 
-        // Обработка удаленного потока
+        // Handle the remote stream
         this.peerConnection.ontrack = (event) => {
             console.log('Remote track received');
             UI.setRemoteVideoStream(event.streams[0]);
         };
 
-        // Сбор ICE кандидатов и отправка через Socket.IO
+        // Collect ICE candidates and send them via Socket.IO
         this.peerConnection.onicecandidate = (event) => {
             if (event.candidate) {
                 SocketHandler.sendIceCandidate(this.room, event.candidate);

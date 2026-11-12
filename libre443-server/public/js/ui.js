@@ -22,7 +22,7 @@ const UI = {
     },
 
     setRemoteVideoStream(stream) {
-        // Устанавливаем поток только если он еще не установлен
+        // Set the stream only if it is not set yet
         if (this.remoteVideo.srcObject !== stream) {
             this.remoteVideo.srcObject = stream;
         }

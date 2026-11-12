@@ -1,4 +1,4 @@
-// Глобальный объект для хранения состояния приложения
+// Global object that holds the app state
 const appState = {
     room: 'main',
     localStream: null,
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await enterRoom();
 
-    // Обработка отправки сообщения в чат
+    // Handle sending a chat message
     document.getElementById('send-btn').addEventListener('click', () => {
         const messageInput = document.getElementById('chat-input');
         const message = messageInput.value.trim();
