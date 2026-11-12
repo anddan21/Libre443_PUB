@@ -1,22 +1,22 @@
-Проект: Libre443
-Дата создания документа: 26 февраля 2026 года
+Project: Libre443
+Document created: February 26, 2026
 
-ГЛАВНАЯ ЦЕЛЬ
-Создание полностью независимого и защищенного веб приложения для связи (текст, файлы, видео), которое невозможно заблокировать или отследить стандартными системами глубокого анализа трафика (DPI). Приложение должно работать прямо в браузере без установки дополнительных программ или VPN.
+MAIN GOAL
+Build a fully independent and secure web app for communication (text, files, video) that cannot be blocked or tracked by standard deep packet inspection (DPI) systems. The app must work directly in the browser, with no extra software or VPN to install.
 
-ОСНОВНАЯ АУДИТОРИЯ
-Пользователи в регионах с жесткой цензурой интернета, которым нужно максимально простое решение, работающее "из коробки" на любом устройстве, включая iPhone через браузер Safari.
+TARGET AUDIENCE
+Users in regions with strict internet censorship who need the simplest possible solution that works out of the box on any device, including iPhone in Safari.
 
-ТЕХНИЧЕСКАЯ АРХИТЕКТУРА И МАСКИРОВКА ТРАФИКА
-1. Инфраструктура
-* Хостинг: Облачный VPS сервер (изначально Google Cloud) с возможностью быстрой смены IP адреса в случае ковровых блокировок подсетей. Оптимальное расположение — Европа, для балансировки пинга.
-* Доступ: Обязательная привязка к неприметному доменному имени для получения официального доверенного SSL сертификата (Let's Encrypt). Это критически важно, иначе мобильные браузеры заблокируют доступ к камере.
+TECHNICAL ARCHITECTURE AND TRAFFIC OBFUSCATION
+1. Infrastructure
+* Hosting: a cloud VPS (initially Google Cloud) with the ability to change the IP address quickly in case of subnet wide blocking. The best location is Europe, to balance latency.
+* Access: a low profile domain name is required to obtain an official trusted SSL certificate (Let's Encrypt). This is critical, otherwise mobile browsers block camera access.
 
-2. Сетевые протоколы
-* Единый порт: Абсолютно все соединения идут исключительно через порт 443.
-* Текст и файлы: Сигнализация и обмен текстовыми данными происходят через защищенные веб сокеты (WSS).
-* Видео и аудио стрим: Используется технология WebRTC, но прямой P2P обмен между пользователями принудительно отключен. Весь медиа трафик заворачивается в TCP туннель через собственный TURN сервер (Coturn).
-* Шифрование: TURN сервер настраивается на работу поверх TLS. Это исключает утечку пакетов по протоколу UDP и делает тяжелый видеопоток абсолютно неотличимым от обычной загрузки "тяжелой" веб страницы по протоколу HTTPS.
+2. Network protocols
+* Single port: every connection goes through port 443 only.
+* Text and files: signaling and text data exchange run over secure WebSockets (WSS).
+* Video and audio streams: WebRTC is used, but direct P2P between users is disabled on purpose. All media traffic is wrapped in a TCP tunnel through a self hosted TURN server (Coturn).
+* Encryption: the TURN server runs over TLS. This prevents UDP packet leaks and makes the heavy video stream indistinguishable from loading a heavy web page over HTTPS.
 
-ОЖИДАЕМЫЙ РЕЗУЛЬТАТ
-Удобный и невидимый для цензоров мессенджер. Пользователи заходят по секретному веб адресу, вводят пароль доступа и получают стабильную связь с задержкой в пределах 200—300 миллисекунд.
+EXPECTED RESULT
+A convenient messenger that is invisible to censors. Users open a private web address, enter an access password and get a stable connection with 200 to 300 ms latency.

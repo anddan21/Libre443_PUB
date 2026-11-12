@@ -1,9 +1,9 @@
-# Системные файлы
+# System files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Среда разработки
+# IDE
 .idea/
 .vscode/
 
@@ -12,7 +12,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-# Локальные переменные и ключи
+# Local environment variables and keys
 .env
 server_output.log
 libre443-server/server_output.log

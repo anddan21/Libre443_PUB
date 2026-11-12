@@ -1,63 +1,63 @@
-Проект: Libre443
-Дата: 28 февраля 2026 года
+Project: Libre443
+Date: February 28, 2026
 
-ЭТАП 1: ЛОКАЛЬНАЯ СРЕДА И GITHUB
-* Инициализировать проект на локальном компьютере
-* Создать репозиторий на GitHub для контроля версий
-* Настроить файл .gitignore
-* Создать модульную структуру сервера (server.js, src/config.js, src/sockets.js)
+STAGE 1: LOCAL ENVIRONMENT AND GITHUB
+* Initialize the project on the local machine
+* Create a GitHub repository for version control
+* Set up .gitignore
+* Create a modular server structure (server.js, src/config.js, src/sockets.js)
 
-ЭТАП 2: ЛОКАЛЬНОЕ ТЕСТИРОВАНИЕ ВЕБ ПРИЛОЖЕНИЯ
-* Создать модульный клиентский интерфейс
-  * public/index.html — маскировочная страница входа «Beauty Forum»
-  * public/chat.html — скрытая комната видеочата
+STAGE 2: LOCAL TESTING OF THE WEB APP
+* Create a modular client interface
+  * public/index.html: cover login page "Beauty Forum"
+  * public/chat.html: hidden video chat room
   * public/css/style.css
   * public/js/main.js, socket.js, webrtc.js, ui.js
-* Настроить захват потока с камеры и микрофона
-* Интегрировать WebRTC для обмена видео и текстом
-* Провести тестовый звонок на localhost
+* Set up camera and microphone capture
+* Integrate WebRTC for video and text exchange
+* Make a test call on localhost
 
-ЭТАП 3: ПОДГОТОВКА ПРОДАКШН ИНФРАСТРУКТУРЫ
-* Арендовать новый VPS сервер с локацией в Европе
-* Установить чистую ОС Ubuntu
-* Зарегистрировать неприметное доменное имя и привязать его к IP
+STAGE 3: PRODUCTION INFRASTRUCTURE
+* Rent a new VPS located in Europe
+* Install a clean Ubuntu OS
+* Register a low profile domain name and point it to the IP
 
-ЭТАП 4: БЕЗОПАСНОСТЬ И МАСКИРОВКА ТРАФИКА
-* Получить официальный SSL сертификат Let's Encrypt для домена
-* Настроить прием всех соединений строго на защищенный порт 443
+STAGE 4: SECURITY AND TRAFFIC OBFUSCATION
+* Obtain an official Let's Encrypt SSL certificate for the domain
+* Accept all connections strictly on secure port 443
 
-ЭТАП 5: НАСТРОЙКА РЕТРАНСЛЯТОРА ВИДЕО
-* Установить пакет Coturn на арендованный VPS
-* Настроить Coturn на принудительную работу через TCP протокол с шифрованием TLS
-* Полностью отключить незашифрованный UDP трафик
+STAGE 5: VIDEO RELAY SETUP
+* Install Coturn on the VPS
+* Configure Coturn to work only over TCP with TLS encryption
+* Fully disable unencrypted UDP traffic
 
-ЭТАП 6: РАЗВЕРТЫВАНИЕ И БОЕВОЕ ТЕСТИРОВАНИЕ
-* Клонировать готовый код с GitHub на удаленный сервер
-* Провести боевой тест: видеозвонок между Лос Анджелесом и Москвой
-* Убедиться в стабильности связи на устройстве Светланы
+STAGE 6: DEPLOYMENT AND FIELD TESTING
+* Clone the code from GitHub to the remote server
+* Field test: a video call between two distant locations
+* Confirm connection stability on the target user's device
 
-ЭТАП 7: НОВАЯ ЛОГИКА ИНТЕРФЕЙСА ЧАТА И ЗВОНКОВ
-* Исходное состояние при входе в комнату: медиаустройства НЕ инициализируются, видео скрыто
-* На весь экран отображается текстовый чат
-* В шапке находится кнопка CALL, по умолчанию она недоступна
-* Кнопка CALL становится активной только когда в комнате ровно 2 пользователя
-* Системные сообщения в чате выводятся красным: Sys: <username> joined the room и Sys: <username> left the room (username из LIBRE443_USERS)
-* Если один уходит и остается один пользователь, кнопка CALL снова блокируется
-* Все системные сообщения и интерфейс строго на английском языке
-* При нажатии CALL первым пользователем: у второго пользователя кнопка начинает мигать
-* При ответе (нажатии мигающей кнопки CALL): инициализируется WebRTC, запрашиваются камера и микрофон
-* По умолчанию при соединении: видео ВЫКЛЮЧЕНО, аудио ВКЛЮЧЕНО
-* Появляется окно видео с кнопками управления Video и Audio
-* Кнопка CALL меняется на HANG UP
-* При нажатии HANG UP: соединение разрывается, медиаустройства отключаются, видео скрывается
-* Пользователи остаются в текстовом чате, кнопка HANG UP снова становится CALL
+STAGE 7: NEW CHAT AND CALL UI LOGIC
+* Initial state on entering the room: media devices are NOT initialized, video is hidden
+* The text chat fills the screen
+* The header has a CALL button, disabled by default
+* CALL becomes active only when there are exactly 2 users in the room
+* System messages are shown in red: Sys: <username> joined the room and Sys: <username> left the room (username from LIBRE443_USERS)
+* If one user leaves and only one remains, CALL is disabled again
+* All system messages and the UI are strictly in English
+* When the first user presses CALL, the second user's button starts blinking
+* On answer (pressing the blinking CALL button): WebRTC is initialized, camera and microphone are requested
+* Default on connect: video OFF, audio ON
+* A video window appears with Video and Audio controls
+* CALL changes to HANG UP
+* On HANG UP: the connection is closed, media devices are released, video is hidden
+* Users stay in the text chat, HANG UP changes back to CALL
 
-ТЕКУЩЕЕ СОСТОЯНИЕ (актуально)
-* Маскировочная страница: index.html — «Welcome to the Beauty Forum», форма Login (Username, Password). Пользователи в переменной окружения LIBRE443_USERS (файл .env в корне сервера, в репозиторий не входит). Cookie-авторизация, доступ к /chat.html только после входа.
-* После входа — автоподключение к комнате «main», без выбора комнаты и кнопки Join. Сразу запрашиваются камера и микрофон, инициализируется WebRTC при появлении второго пользователя.
-* Системные сообщения: префикс «Sys:» (не «System»), без слова «User» (например: «Sys: Andrey joined the room», «Sys: Andrey left the room», «Sys: Andrey turned off their video»). Имена из LIBRE443_USERS. Интерфейс и консольные сообщения на английском.
-* Кнопка Exit в шапке чата; при нажатии — модальное подтверждение (Cancel / Exit). Кнопка «Назад» в браузере тоже открывает это окно, без немедленного выхода.
-* Десктоп: шапка с градиентным фоном, заголовок и версия (версия меньшим шрифтом). Видео слева, текстовый чат справа на всю высоту контентной области. Превью своего видео 150px.
-* Мобильная версия: вертикальный layout (видео сверху, чат снизу), фиксированная высота чата 450px с прокруткой, превью 150px; в полноэкранном режиме кнопки Video/Audio видны (учёт safe area).
-* Favicon: public/favicon.png, подключён в index.html и chat.html.
-* WebRTC и сокеты без изменений. Версия приложения 0.30.
+CURRENT STATE
+* Cover page: index.html "Welcome to the Beauty Forum" with a Login form (Username, Password). Users are defined in the LIBRE443_USERS environment variable (.env in the server root, not in the repository). Cookie based auth, /chat.html is available only after login.
+* After login the user joins room "main" automatically, with no room selection or Join button. Camera and microphone are requested right away, WebRTC starts when the second user appears.
+* System messages: prefix "Sys:" (not "System"), without the word "User" (for example "Sys: Andrey joined the room", "Sys: Andrey left the room", "Sys: Andrey turned off their video"). Names come from LIBRE443_USERS. UI and console messages are in English.
+* Exit button in the chat header opens a confirmation modal (Cancel / Exit). The browser Back button opens the same modal instead of leaving immediately.
+* Desktop: header with a gradient background, title and version (version in a smaller font). Video on the left, text chat on the right at full content height. Own video preview 150px.
+* Mobile: vertical layout (video on top, chat below), fixed chat height 450px with scrolling, preview 150px. In fullscreen the Video/Audio buttons stay visible (safe area aware).
+* Favicon: public/favicon.png, linked in index.html and chat.html.
+* App version 0.30.
